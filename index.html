@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Microproducts by Eco Dynamics Co., Limited builds Chrome extensions, Figma plugins, mobile apps, and focused software products, including AutoRedactor for Figma and Screenshotter for Chrome." />
+  <title>Microproducts - Small software products for design teams</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --color-midnight-ink: #18161a;
+      --color-polar-white: #ffffff;
+      --color-cloud-gray: #fafaf8;
+      --color-stone-slate: #333333;
+      --color-ash-mist: #898b91;
+      --color-lilac-gray: #ede9ff;
+      --color-lavender-hue: #d9d2ff;
+      --color-plum-royal: #4823ff;
+      --color-vivid-violet: #6d67fb;
+      --color-soft-indigo: #7e78ff;
+      --color-lime-spritz: #e7ff6e;
+      --color-sky-whisper: #99cefe;
+      --color-pale-plum: #dfddff;
+      --color-sunset-orange: #ffa360;
+      --font-plus-jakarta-sans: "Plus Jakarta Sans", Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-inter: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --radius-card: 20px;
+      --radius-button: 100px;
+      --accent: var(--color-plum-royal);
+      --ink: var(--color-midnight-ink);
+      --muted: var(--color-stone-slate);
+      --soft: var(--color-cloud-gray);
+      --surface: var(--color-polar-white);
+      --border: var(--color-lilac-gray);
+      --line: var(--color-lavender-hue);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-inter);
+      color: var(--ink);
+      background: var(--surface);
+      line-height: 1.5;
+      font-size: 16px;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    nav {
+      padding: 20px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      border-bottom: 1px solid var(--color-lilac-gray);
+      position: sticky;
+      top: 0;
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(10px);
+      z-index: 100;
+    }
+
+    .nav-logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--ink);
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 0;
+    }
+
+    .brand-mark {
+      width: 30px;
+      height: 30px;
+      border-radius: 50px;
+      background: var(--color-plum-royal);
+      color: white;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav-link {
+      color: var(--color-stone-slate);
+      font-size: 14px;
+      white-space: nowrap;
+      transition: color 0.2s ease;
+    }
+
+    .nav-link:hover { color: var(--ink); text-decoration: none; }
+
+    section { padding: 84px 32px; }
+    .container { max-width: 1120px; margin: 0 auto; }
+    .narrow { max-width: 760px; }
+
+    .hero {
+      padding: 84px 32px 72px;
+      background:
+        radial-gradient(circle at 72% 0%, rgba(43, 21, 153, 0.14), rgba(0, 0, 0, 0) 34%),
+        linear-gradient(180deg, var(--color-cloud-gray) 0%, var(--color-polar-white) 78%);
+    }
+
+    .hero-grid {
+      display: block;
+      max-width: 900px;
+    }
+
+    .hero h1 {
+      font-family: var(--font-plus-jakarta-sans);
+      font-size: 77px;
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: 0;
+      margin-bottom: 28px;
+      max-width: 940px;
+    }
+
+    .hero h1 span { color: var(--color-vivid-violet); }
+
+    .hero-copy {
+      font-size: 18px;
+      line-height: 1.5;
+      color: var(--color-stone-slate);
+      max-width: 700px;
+      margin-bottom: 36px;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 22px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0 25px;
+      border-radius: var(--radius-button);
+      border: 1px solid transparent;
+      font-size: 14px;
+      font-weight: 650;
+      line-height: 1;
+      transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease;
+    }
+
+    .button:hover { text-decoration: none; transform: translateY(-1px); }
+    .button-primary { background: var(--color-plum-royal); color: white; }
+    .button-primary:hover { background: #3517d6; }
+    .button-secondary { color: var(--ink); border-color: var(--ink); background: transparent; }
+    .button-secondary:hover { border-color: var(--color-plum-royal); color: var(--color-plum-royal); }
+
+    .hero-note {
+      color: var(--color-stone-slate);
+      font-size: 13px;
+    }
+
+    .rewrite-card {
+      border: 1px solid var(--color-lavender-hue);
+      border-radius: 20px;
+      padding: 16px;
+      background: rgba(126, 120, 255, 0.1);
+      margin-bottom: 12px;
+    }
+
+    .rewrite-card label {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-stone-slate);
+      margin-bottom: 7px;
+    }
+
+    .rewrite-card p {
+      font-size: 14px;
+      color: var(--ink);
+      line-height: 1.45;
+    }
+
+    .section-label {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-family: var(--font-plus-jakarta-sans);
+      font-size: 63px;
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: 0;
+      margin-bottom: 24px;
+      max-width: 920px;
+    }
+
+    .section-copy {
+      color: var(--color-stone-slate);
+      font-size: 17px;
+      max-width: 720px;
+      margin-bottom: 40px;
+    }
+
+    .soft-section { background: var(--soft); }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+      align-items: stretch;
+    }
+
+    .product-card,
+    .plain-card {
+      background: white;
+      border: 1px solid var(--color-lilac-gray);
+      border-radius: var(--radius-card);
+      padding: 30px;
+      box-shadow: none;
+    }
+
+    .product-card:nth-child(2) {
+      background: var(--color-sky-whisper);
+      border-color: var(--color-sky-whisper);
+    }
+
+    .product-card h3,
+    .plain-card h3 {
+      font-size: 22px;
+      font-weight: 700;
+      line-height: 1.4;
+      margin-bottom: 12px;
+    }
+
+    .product-card p,
+    .plain-card p {
+      color: var(--color-stone-slate);
+      font-size: 15px;
+    }
+
+    .copy-example {
+      display: grid;
+      gap: 10px;
+      margin-top: 22px;
+      padding-top: 2px;
+    }
+
+    .copy-example .rewrite-card {
+      margin-bottom: 0;
+      padding: 14px;
+    }
+
+    .copy-example .rewrite-card p {
+      color: var(--ink);
+      font-size: 14px;
+      line-height: 1.45;
+    }
+
+    .product-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 22px 0;
+    }
+
+    .meta-item {
+      border: 1px solid var(--color-lavender-hue);
+      border-radius: 999px;
+      padding: 8px 12px;
+      color: var(--color-stone-slate);
+      font-size: 13px;
+      background: var(--color-polar-white);
+    }
+
+    .product-note {
+      color: var(--color-stone-slate);
+      font-size: 13px;
+      line-height: 1.55;
+      margin-top: 16px;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .feature-card {
+      background: var(--color-polar-white);
+      border: 1px solid var(--color-lilac-gray);
+      border-radius: var(--radius-card);
+      padding: 24px;
+    }
+
+    .feature-card:nth-child(1) { background: var(--color-lime-spritz); border-color: var(--color-lime-spritz); }
+    .feature-card:nth-child(2) { background: var(--color-sky-whisper); border-color: var(--color-sky-whisper); }
+    .feature-card:nth-child(3) { background: rgba(126, 120, 255, 0.1); }
+
+    .feature-symbol {
+      width: 36px;
+      height: 36px;
+      border-radius: 50px;
+      background: var(--color-pale-plum);
+      color: var(--color-plum-royal);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 800;
+      margin-bottom: 14px;
+    }
+
+    .feature-card h3 {
+      font-size: 15px;
+      line-height: 1.3;
+      margin-bottom: 8px;
+    }
+
+    .feature-card p {
+      color: var(--color-stone-slate);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .legal-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .legal-card {
+      background: white;
+      border: 1px solid var(--color-lilac-gray);
+      border-radius: var(--radius-card);
+      padding: 24px;
+    }
+
+    .legal-card h3 {
+      font-size: 17px;
+      margin-bottom: 12px;
+    }
+
+    .legal-card p {
+      color: var(--color-stone-slate);
+      font-size: 13px;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+
+    .contacts {
+      background: var(--soft);
+      border-top: 1px solid var(--color-lilac-gray);
+    }
+
+    .contacts-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .contact-item {
+      background: white;
+      border: 1px solid var(--color-lilac-gray);
+      border-radius: var(--radius-card);
+      padding: 20px;
+    }
+
+    .contact-item label {
+      display: block;
+      font-size: 12px;
+      font-weight: 750;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--color-stone-slate);
+      margin-bottom: 5px;
+    }
+
+    .contact-item p {
+      font-size: 15px;
+      color: var(--ink);
+      overflow-wrap: anywhere;
+    }
+
+    footer {
+      padding: 26px 24px;
+      border-top: 1px solid var(--color-lilac-gray);
+      text-align: center;
+      color: var(--color-stone-slate);
+      font-size: 13px;
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid,
+      .products-grid,
+      .legal-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .features-grid,
+      .contacts-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .hero h1 { font-size: 63px; }
+      .section-title { font-size: 42px; }
+    }
+
+    @media (max-width: 640px) {
+      nav {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 12px 16px;
+        gap: 10px;
+      }
+
+      .nav-links {
+        width: 100%;
+        justify-content: flex-start;
+        gap: 12px;
+      }
+
+      .nav-logo { font-size: 17px; }
+      .brand-mark { width: 28px; height: 28px; }
+      section { padding: 62px 16px; }
+      .hero { padding: 48px 16px 28px; }
+      .hero h1 { font-size: 42px; }
+      .section-title { font-size: 31px; line-height: 1.1; }
+      .hero-copy { font-size: 16.5px; margin-bottom: 28px; }
+      .hero-actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin-bottom: 20px;
+      }
+      .button { width: auto; padding: 0 12px; }
+      .rewrite-card { padding: 12px; margin-bottom: 0; }
+      .rewrite-card label { font-size: 10px; margin-bottom: 4px; }
+      .rewrite-card p { font-size: 13px; }
+      .features-grid,
+      .contacts-grid { grid-template-columns: 1fr; }
+      .product-card,
+      .plain-card,
+      .legal-card { padding: 22px; }
+      .button { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-logo" href="#top" aria-label="Microproducts home">
+      <span class="brand-mark">m</span>
+      microproducts
+    </a>
+    <div class="nav-links" aria-label="Main navigation">
+      <a href="#studio" class="nav-link">Studio</a>
+      <a href="#products" class="nav-link">Products</a>
+      <a href="#terms" class="nav-link">Terms</a>
+      <a href="#privacy" class="nav-link">Privacy</a>
+      <a href="#contact" class="nav-link">Contact</a>
+    </div>
+  </nav>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <h1>Small software products for <span>clearer work</span></h1>
+          <p class="hero-copy">Microproducts is a software brand operated by Eco Dynamics Co., Limited. We build browser extensions, Figma plugins, mobile apps, and focused workflow tools, including AutoRedactor for Figma and Screenshotter for Chrome.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#studio">Explore studio</a>
+            <a class="button button-secondary" href="#terms">Read terms</a>
+          </div>
+          <p class="hero-note">Operated by Eco Dynamics Co., Limited. Support: <a href="mailto:support.microproducts@gmail.com">support.microproducts@gmail.com</a></p>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="soft-section" id="studio">
+      <div class="container">
+        <div class="section-label">Studio</div>
+        <h2 class="section-title">Software products across browser, design, and mobile platforms</h2>
+        <p class="section-copy">Eco Dynamics Co., Limited operates Microproducts as a product studio for small, practical software. We build and maintain our own tools and can develop custom software projects when there is a clear scope, delivery process, and commercial agreement.</p>
+        <div class="features-grid">
+          <article class="feature-card">
+            <div class="feature-symbol">CX</div>
+            <h3>Chrome extensions</h3>
+            <p>Browser add-ons for productivity, automation, content workflows, and focused online tasks.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-symbol">FG</div>
+            <h3>Figma plugins</h3>
+            <p>Design workflow plugins for text, review, automation, and product team collaboration.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-symbol">AP</div>
+            <h3>Mobile apps</h3>
+            <p>Consumer and productivity apps for distribution through the App Store and Google Play.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-symbol">CS</div>
+            <h3>Custom software</h3>
+            <p>Scoped internal tools, prototypes, and workflow software delivered under a separate agreement.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="products">
+      <div class="container">
+        <div class="section-label">Products</div>
+        <h2 class="section-title">Focused tools instead of bloated platforms</h2>
+        <p class="section-copy">Microproducts ships compact software for specific professional tasks. Our products may be distributed as web tools, Chrome extensions, Figma plugins, App Store apps, or Google Play apps. Each commercial product is designed to be easy to understand, easy to buy, and easy to cancel when recurring billing applies.</p>
+
+        <div class="products-grid">
+          <article class="product-card">
+            <h3>AutoRedactor</h3>
+            <p>AutoRedactor is a Figma plugin that uses AI to improve UX and interface text directly inside selected frames. It helps product designers and teams make copy shorter, clearer, and more consistent without leaving the design file.</p>
+            <div class="product-meta">
+              <span class="meta-item">Figma plugin</span>
+              <span class="meta-item">AI text editing</span>
+              <span class="meta-item">Digital access</span>
+            </div>
+            <div class="copy-example" aria-label="AutoRedactor copy improvement example">
+              <div class="rewrite-card">
+                <label>Before</label>
+                <p>Please click this button in order to continue to the next step of the process.</p>
+              </div>
+              <div class="rewrite-card">
+                <label>After</label>
+                <p>Continue to the next step.</p>
+              </div>
+            </div>
+            <p class="product-note">A simple example of how the plugin turns long interface copy into a shorter UI message.</p>
+          </article>
+
+          <article class="product-card">
+            <h3>Screenshotter</h3>
+            <p>Screenshotter is a Chrome extension for automated capture on configured target websites. It can save visible-page PNG screenshots or full-page PDF exports after page load, organize files in the Downloads folder, track capture statistics, use a configurable delay, and skip excluded URLs.</p>
+            <div class="product-meta">
+              <span class="meta-item">Chrome extension</span>
+              <span class="meta-item">PNG and PDF capture</span>
+              <span class="meta-item">URL exclusions</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="soft-section">
+      <div class="container">
+        <div class="section-label">Features</div>
+        <h2 class="section-title">Built for practical product copy work</h2>
+        <div class="features-grid">
+          <article class="feature-card">
+            <div class="feature-symbol">AI</div>
+            <h3>Clearer UI text</h3>
+            <p>Rewrite labels, empty states, helper text, and short interface messages into simpler language.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-symbol">RP</div>
+            <h3>Editorial rules</h3>
+            <p>Use your own writing guidelines so suggestions match the voice and style of your product.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-symbol">FG</div>
+            <h3>Works in Figma</h3>
+            <p>Apply improved text directly to design layers while preserving layout and visual styles.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-symbol">SK</div>
+            <h3>No user API key</h3>
+            <p>AI processing runs through the service, so customers do not need to bring their own AI account.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="terms">
+      <div class="container">
+        <div class="section-label">Customer terms</div>
+        <h2 class="section-title">Terms of service, delivery, and refunds</h2>
+        <div class="legal-grid">
+          <article class="legal-card">
+            <h3>Service terms</h3>
+            <p>Microproducts provides access to software products and related digital services, including AutoRedactor and Screenshotter. The seller and operator is Eco Dynamics Co., Limited, UNIT 12B 16/F BEA TOWER OF MILLENNIUM CITY 5, 418 KWUN TONG ROAD, KWUN TONG KL, HONG KONG.</p>
+            <p>Customers may use the product for lawful design, content, and product work.</p>
+            <p>The product is provided as hosted software and may depend on third-party services such as Figma and AI infrastructure. We work to keep the service available, but uninterrupted access is not guaranteed.</p>
+          </article>
+
+          <article class="legal-card">
+            <h3>Delivery</h3>
+            <p>Access to Microproducts software is delivered digitally. When a product or custom software service is paid, the customer receives access through the relevant product interface, browser extension, plugin, account, or written delivery process after successful payment. No physical goods are shipped.</p>
+            <p>If activation does not work after payment, contact support at <a href="mailto:support.microproducts@gmail.com">support.microproducts@gmail.com</a>.</p>
+          </article>
+
+          <article class="legal-card">
+            <h3>Refund policy</h3>
+            <p>For subscriptions, customers can cancel at any time. Cancellation prevents future renewals but does not automatically refund the current billing period.</p>
+            <p>Refunds may be issued for duplicate charges, technical payment errors, or cases where paid access was not delivered. Refund requests are reviewed within 5 business days.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="soft-section" id="privacy">
+      <div class="container narrow">
+        <div class="section-label">Privacy policy</div>
+        <h2 class="section-title">We collect only the data needed to operate the product</h2>
+        <p class="section-copy">Microproducts may process account identifiers, subscription or license status, usage information needed for limits and support, customer-selected text for AI improvement in AutoRedactor, and browser-extension settings such as target-site configuration, excluded URL patterns, capture mode, and capture statistics in Screenshotter. This data is used to provide the service, process payments when applicable, prevent abuse, and answer support requests.</p>
+        <p class="section-copy">We do not sell customer personal data. Payment details are processed by the payment provider and are not stored on this website. Microproducts is operated by Eco Dynamics Co., Limited. Customers can request support or data questions by email at <a href="mailto:support.microproducts@gmail.com">support.microproducts@gmail.com</a>.</p>
+      </div>
+    </section>
+
+    <section class="contacts" id="contact">
+      <div class="container">
+        <div class="section-label">Contact</div>
+        <h2 class="section-title">Business and support details</h2>
+        <div class="contacts-grid">
+          <div class="contact-item">
+            <label>Brand</label>
+            <p>Microproducts</p>
+          </div>
+          <div class="contact-item">
+            <label>Legal name</label>
+            <p>Eco Dynamics Co., Limited</p>
+          </div>
+          <div class="contact-item">
+            <label>Products</label>
+            <p>AutoRedactor for Figma, Screenshotter for Chrome</p>
+          </div>
+          <div class="contact-item">
+            <label>Email</label>
+            <p><a href="mailto:support.microproducts@gmail.com">support.microproducts@gmail.com</a></p>
+          </div>
+          <div class="contact-item">
+            <label>Company address</label>
+            <p>UNIT 12B 16/F BEA TOWER OF MILLENNIUM CITY 5, 418 KWUN TONG ROAD, KWUN TONG KL, HONG KONG.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Copyright 2026 Microproducts. Operated by Eco Dynamics Co., Limited. Products: AutoRedactor and Screenshotter. <a href="#terms">Terms</a> and <a href="#privacy">Privacy</a>.</p>
+  </footer>
+
+</body>
+</html>
