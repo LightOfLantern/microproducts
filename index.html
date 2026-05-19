@@ -110,8 +110,6 @@
 
     section { padding: 42px 32px; }
     .container { max-width: 1120px; margin: 0 auto; }
-    .narrow { max-width: 760px; }
-
     .hero {
       padding: 84px 32px 72px;
       background:
@@ -201,6 +199,10 @@
       font-size: 17px;
       max-width: 720px;
       margin-bottom: 40px;
+    }
+
+    #privacy .section-copy {
+      max-width: 760px;
     }
 
     .soft-section { background: var(--soft); }
@@ -332,13 +334,14 @@
     }
 
     .contacts-grid {
-      display: flex;
-      align-items: flex-start;
+      display: grid;
+      grid-template-columns: minmax(0, 760px);
+      justify-content: start;
       gap: 18px;
     }
 
     .contact-item {
-      width: fit-content;
+      width: auto;
       max-width: 100%;
       background: white;
       border: 1px solid var(--color-lilac-gray);
@@ -557,7 +560,7 @@
     </section>
 
     <section class="soft-section" id="privacy">
-      <div class="container narrow">
+      <div class="container">
         <div class="section-label">Privacy policy</div>
         <h2 class="section-title">Minimal product data</h2>
         <p class="section-copy">Microproducts uses only the account, license, usage, and support data needed to operate AutoRedactor, Screenshotter, Shelf, payments, and customer requests. We may use third-party service providers for hosting, payments, support, product infrastructure, and AI functionality where required. We do not sell personal data or store payment card details on this website. Privacy questions can be sent to <a href="mailto:support.microproducts@gmail.com">support.microproducts@gmail.com</a>.</p>
