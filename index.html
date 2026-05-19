@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Microproducts by Eco Dynamics Co., Limited builds Chrome extensions, Figma plugins, mobile apps, and focused software products, including AutoRedactor for Figma and Screenshotter for Chrome." />
+  <meta name="description" content="Microproducts by Eco Dynamics Co., Limited builds Chrome extensions, Figma plugins, mobile apps, and focused software products, including AutoRedactor, Screenshotter, and Shelf." />
   <title>Microproducts - Small software products for design teams</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,6 +24,7 @@
       --color-soft-indigo: #7e78ff;
       --color-lime-spritz: #e7ff6e;
       --color-sky-whisper: #99cefe;
+      --color-sky-whisper-soft: #e7f4ff;
       --color-pale-plum: #dfddff;
       --color-sunset-orange: #ffa360;
       --font-plus-jakarta-sans: "Plus Jakarta Sans", Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -107,13 +108,14 @@
 
     .nav-link:hover { color: var(--ink); text-decoration: none; }
 
-    section { padding: 84px 32px; }
+    section { padding: 42px 32px; }
     .container { max-width: 1120px; margin: 0 auto; }
     .narrow { max-width: 760px; }
 
     .hero {
       padding: 84px 32px 72px;
       background:
+        radial-gradient(circle at 10% 18%, rgba(231, 255, 110, 0.48), rgba(231, 255, 110, 0) 30%),
         radial-gradient(circle at 72% 0%, rgba(43, 21, 153, 0.14), rgba(0, 0, 0, 0) 34%),
         linear-gradient(180deg, var(--color-cloud-gray) 0%, var(--color-polar-white) 78%);
     }
@@ -176,30 +178,6 @@
       font-size: 13px;
     }
 
-    .rewrite-card {
-      border: 1px solid var(--color-lavender-hue);
-      border-radius: 20px;
-      padding: 16px;
-      background: rgba(126, 120, 255, 0.1);
-      margin-bottom: 12px;
-    }
-
-    .rewrite-card label {
-      display: block;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--color-stone-slate);
-      margin-bottom: 7px;
-    }
-
-    .rewrite-card p {
-      font-size: 14px;
-      color: var(--ink);
-      line-height: 1.45;
-    }
-
     .section-label {
       font-size: 13px;
       font-weight: 700;
@@ -244,10 +222,7 @@
       box-shadow: none;
     }
 
-    .product-card:nth-child(2) {
-      background: var(--color-sky-whisper);
-      border-color: var(--color-sky-whisper);
-    }
+    .product-card:nth-child(2) { background: var(--color-polar-white); }
 
     .product-card h3,
     .plain-card h3 {
@@ -261,24 +236,6 @@
     .plain-card p {
       color: var(--color-stone-slate);
       font-size: 15px;
-    }
-
-    .copy-example {
-      display: grid;
-      gap: 10px;
-      margin-top: 22px;
-      padding-top: 2px;
-    }
-
-    .copy-example .rewrite-card {
-      margin-bottom: 0;
-      padding: 14px;
-    }
-
-    .copy-example .rewrite-card p {
-      color: var(--ink);
-      font-size: 14px;
-      line-height: 1.45;
     }
 
     .product-meta {
@@ -297,13 +254,6 @@
       background: var(--color-polar-white);
     }
 
-    .product-note {
-      color: var(--color-stone-slate);
-      font-size: 13px;
-      line-height: 1.55;
-      margin-top: 16px;
-    }
-
     .features-grid {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -318,15 +268,18 @@
     }
 
     .feature-card:nth-child(1) { background: var(--color-lime-spritz); border-color: var(--color-lime-spritz); }
-    .feature-card:nth-child(2) { background: var(--color-sky-whisper); border-color: var(--color-sky-whisper); }
+    .feature-card:nth-child(2) { background: var(--color-sky-whisper-soft); border-color: var(--color-sky-whisper); }
     .feature-card:nth-child(3) { background: rgba(126, 120, 255, 0.1); }
 
     .feature-symbol {
-      width: 36px;
+      width: fit-content;
+      min-width: 0;
       height: 36px;
+      padding: 0 14px;
       border-radius: 50px;
-      background: var(--color-pale-plum);
-      color: var(--color-plum-royal);
+      background: var(--color-polar-white);
+      color: var(--ink);
+      border: 1px solid var(--ink);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -378,12 +331,14 @@
     }
 
     .contacts-grid {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
+      display: flex;
+      align-items: flex-start;
       gap: 18px;
     }
 
     .contact-item {
+      width: fit-content;
+      max-width: 100%;
       background: white;
       border: 1px solid var(--color-lilac-gray);
       border-radius: var(--radius-card);
@@ -392,10 +347,10 @@
 
     .contact-item label {
       display: block;
-      font-size: 12px;
-      font-weight: 750;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
+      font-size: 13px;
+      font-weight: 650;
+      letter-spacing: 0;
+      text-transform: none;
       color: var(--color-stone-slate);
       margin-bottom: 5px;
     }
@@ -404,6 +359,11 @@
       font-size: 15px;
       color: var(--ink);
       overflow-wrap: anywhere;
+      margin-bottom: 16px;
+    }
+
+    .contact-item p:last-child {
+      margin-bottom: 0;
     }
 
     footer {
@@ -421,8 +381,7 @@
         grid-template-columns: 1fr;
       }
 
-      .features-grid,
-      .contacts-grid {
+      .features-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
@@ -446,8 +405,8 @@
 
       .nav-logo { font-size: 17px; }
       .brand-mark { width: 28px; height: 28px; }
-      section { padding: 62px 16px; }
-      .hero { padding: 48px 16px 28px; }
+      section { padding: 31px 16px; }
+      .hero { padding: 32px 16px 20px; }
       .hero h1 { font-size: 42px; }
       .section-title { font-size: 31px; line-height: 1.1; }
       .hero-copy { font-size: 16.5px; margin-bottom: 28px; }
@@ -458,11 +417,7 @@
         margin-bottom: 20px;
       }
       .button { width: auto; padding: 0 12px; }
-      .rewrite-card { padding: 12px; margin-bottom: 0; }
-      .rewrite-card label { font-size: 10px; margin-bottom: 4px; }
-      .rewrite-card p { font-size: 13px; }
-      .features-grid,
-      .contacts-grid { grid-template-columns: 1fr; }
+      .features-grid { grid-template-columns: 1fr; }
       .product-card,
       .plain-card,
       .legal-card { padding: 22px; }
@@ -491,7 +446,7 @@
       <div class="container hero-grid">
         <div>
           <h1>Small software products for <span>clearer work</span></h1>
-          <p class="hero-copy">Microproducts is a software brand operated by Eco Dynamics Co., Limited. We build browser extensions, Figma plugins, mobile apps, and focused workflow tools, including AutoRedactor for Figma and Screenshotter for Chrome.</p>
+          <p class="hero-copy">Microproducts is a software brand operated by Eco Dynamics Co., Limited. We build browser extensions, Figma plugins, mobile apps, and focused workflow tools, including AutoRedactor for Figma, Screenshotter for Chrome, and Shelf for prompt storage.</p>
           <div class="hero-actions">
             <a class="button button-primary" href="#studio">Explore studio</a>
             <a class="button button-secondary" href="#terms">Read terms</a>
@@ -509,24 +464,24 @@
         <p class="section-copy">Eco Dynamics Co., Limited operates Microproducts as a product studio for small, practical software. We build and maintain our own tools and can develop custom software projects when there is a clear scope, delivery process, and commercial agreement.</p>
         <div class="features-grid">
           <article class="feature-card">
-            <div class="feature-symbol">CX</div>
+            <div class="feature-symbol">Chrome</div>
             <h3>Chrome extensions</h3>
             <p>Browser add-ons for productivity, automation, content workflows, and focused online tasks.</p>
           </article>
           <article class="feature-card">
-            <div class="feature-symbol">FG</div>
+            <div class="feature-symbol">Figma</div>
             <h3>Figma plugins</h3>
             <p>Design workflow plugins for text, review, automation, and product team collaboration.</p>
           </article>
           <article class="feature-card">
-            <div class="feature-symbol">AP</div>
+            <div class="feature-symbol">Mobile</div>
             <h3>Mobile apps</h3>
             <p>Consumer and productivity apps for distribution through the App Store and Google Play.</p>
           </article>
           <article class="feature-card">
-            <div class="feature-symbol">CS</div>
+            <div class="feature-symbol">Custom</div>
             <h3>Custom software</h3>
-            <p>Scoped internal tools, prototypes, and workflow software delivered under a separate agreement.</p>
+            <p>Scoped internal tools, prototypes, and workflow software delivered only under a separate written agreement.</p>
           </article>
         </div>
       </div>
@@ -547,17 +502,6 @@
               <span class="meta-item">AI text editing</span>
               <span class="meta-item">Digital access</span>
             </div>
-            <div class="copy-example" aria-label="AutoRedactor copy improvement example">
-              <div class="rewrite-card">
-                <label>Before</label>
-                <p>Please click this button in order to continue to the next step of the process.</p>
-              </div>
-              <div class="rewrite-card">
-                <label>After</label>
-                <p>Continue to the next step.</p>
-              </div>
-            </div>
-            <p class="product-note">A simple example of how the plugin turns long interface copy into a shorter UI message.</p>
           </article>
 
           <article class="product-card">
@@ -569,34 +513,15 @@
               <span class="meta-item">URL exclusions</span>
             </div>
           </article>
-        </div>
-      </div>
-    </section>
 
-    <section class="soft-section">
-      <div class="container">
-        <div class="section-label">Features</div>
-        <h2 class="section-title">Built for practical product copy work</h2>
-        <div class="features-grid">
-          <article class="feature-card">
-            <div class="feature-symbol">AI</div>
-            <h3>Clearer UI text</h3>
-            <p>Rewrite labels, empty states, helper text, and short interface messages into simpler language.</p>
-          </article>
-          <article class="feature-card">
-            <div class="feature-symbol">RP</div>
-            <h3>Editorial rules</h3>
-            <p>Use your own writing guidelines so suggestions match the voice and style of your product.</p>
-          </article>
-          <article class="feature-card">
-            <div class="feature-symbol">FG</div>
-            <h3>Works in Figma</h3>
-            <p>Apply improved text directly to design layers while preserving layout and visual styles.</p>
-          </article>
-          <article class="feature-card">
-            <div class="feature-symbol">SK</div>
-            <h3>No user API key</h3>
-            <p>AI processing runs through the service, so customers do not need to bring their own AI account.</p>
+          <article class="product-card">
+            <h3>Shelf</h3>
+            <p>Shelf is a browser extension for keeping prompts in one place. It helps users save, organize, and reuse prompt snippets without searching through notes, chats, or scattered documents.</p>
+            <div class="product-meta">
+              <span class="meta-item">Browser extension</span>
+              <span class="meta-item">Prompt storage</span>
+              <span class="meta-item">Quick reuse</span>
+            </div>
           </article>
         </div>
       </div>
@@ -609,9 +534,10 @@
         <div class="legal-grid">
           <article class="legal-card">
             <h3>Service terms</h3>
-            <p>Microproducts provides access to software products and related digital services, including AutoRedactor and Screenshotter. The seller and operator is Eco Dynamics Co., Limited, UNIT 12B 16/F BEA TOWER OF MILLENNIUM CITY 5, 418 KWUN TONG ROAD, KWUN TONG KL, HONG KONG.</p>
+            <p>Microproducts provides access to software products and related digital services, including AutoRedactor, Screenshotter, and Shelf. The seller and operator is Eco Dynamics Co., Limited, UNIT 12B 16/F BEA TOWER OF MILLENNIUM CITY 5, 418 KWUN TONG ROAD, KWUN TONG KL, HONG KONG.</p>
             <p>Customers may use the product for lawful design, content, and product work.</p>
-            <p>The product is provided as hosted software and may depend on third-party services such as Figma and AI infrastructure. We work to keep the service available, but uninterrupted access is not guaranteed.</p>
+            <p>The product is provided as hosted software and may depend on third-party services such as browser platforms, Figma, payment providers, and AI infrastructure. We work to keep the service available, but uninterrupted access is not guaranteed.</p>
+            <p>Custom software services are provided only under a separate written agreement that defines scope, delivery milestones, commercial terms, and acceptance terms.</p>
           </article>
 
           <article class="legal-card">
@@ -623,7 +549,7 @@
           <article class="legal-card">
             <h3>Refund policy</h3>
             <p>For subscriptions, customers can cancel at any time. Cancellation prevents future renewals but does not automatically refund the current billing period.</p>
-            <p>Refunds may be issued for duplicate charges, technical payment errors, or cases where paid access was not delivered. Refund requests are reviewed within 5 business days.</p>
+            <p>Refunds may be issued for duplicate charges, technical payment errors, or cases where paid access was not delivered. To request a refund, email <a href="mailto:support.microproducts@gmail.com">support.microproducts@gmail.com</a> with the payment email, product name, charge date, and reason. Refund requests are reviewed within 5 business days.</p>
           </article>
         </div>
       </div>
@@ -632,9 +558,8 @@
     <section class="soft-section" id="privacy">
       <div class="container narrow">
         <div class="section-label">Privacy policy</div>
-        <h2 class="section-title">We collect only the data needed to operate the product</h2>
-        <p class="section-copy">Microproducts may process account identifiers, subscription or license status, usage information needed for limits and support, customer-selected text for AI improvement in AutoRedactor, and browser-extension settings such as target-site configuration, excluded URL patterns, capture mode, and capture statistics in Screenshotter. This data is used to provide the service, process payments when applicable, prevent abuse, and answer support requests.</p>
-        <p class="section-copy">We do not sell customer personal data. Payment details are processed by the payment provider and are not stored on this website. Microproducts is operated by Eco Dynamics Co., Limited. Customers can request support or data questions by email at <a href="mailto:support.microproducts@gmail.com">support.microproducts@gmail.com</a>.</p>
+        <h2 class="section-title">Minimal product data</h2>
+        <p class="section-copy">Microproducts uses only the account, license, usage, and support data needed to operate AutoRedactor, Screenshotter, Shelf, payments, and customer requests. We may use third-party service providers for hosting, payments, support, product infrastructure, and AI functionality where required. We do not sell personal data or store payment card details on this website. Privacy questions can be sent to <a href="mailto:support.microproducts@gmail.com">support.microproducts@gmail.com</a>.</p>
       </div>
     </section>
 
@@ -646,20 +571,10 @@
           <div class="contact-item">
             <label>Brand</label>
             <p>Microproducts</p>
-          </div>
-          <div class="contact-item">
             <label>Legal name</label>
             <p>Eco Dynamics Co., Limited</p>
-          </div>
-          <div class="contact-item">
-            <label>Products</label>
-            <p>AutoRedactor for Figma, Screenshotter for Chrome</p>
-          </div>
-          <div class="contact-item">
             <label>Email</label>
             <p><a href="mailto:support.microproducts@gmail.com">support.microproducts@gmail.com</a></p>
-          </div>
-          <div class="contact-item">
             <label>Company address</label>
             <p>UNIT 12B 16/F BEA TOWER OF MILLENNIUM CITY 5, 418 KWUN TONG ROAD, KWUN TONG KL, HONG KONG.</p>
           </div>
@@ -669,7 +584,7 @@
   </main>
 
   <footer>
-    <p>Copyright 2026 Microproducts. Operated by Eco Dynamics Co., Limited. Products: AutoRedactor and Screenshotter. <a href="#terms">Terms</a> and <a href="#privacy">Privacy</a>.</p>
+    <p>Copyright 2026 Microproducts. Operated by Eco Dynamics Co., Limited. Products: AutoRedactor, Screenshotter, and Shelf. <a href="./#terms">Terms</a> and <a href="./#privacy">Privacy</a>.</p>
   </footer>
 
 </body>
